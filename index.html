@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Attendance System - Student Summary</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>Attendance Management System</h2>
+
+        <div id="aiAlertPanel" class="alert-panel" style="display: none;">
+            <p><strong>🤖 Proactive AI Insight:</strong> <span id="aiAlertMessage"></span></p>
+        </div>
+        
+        <div class="entry-module">
+            <input type="text" id="studentId" placeholder="ID (Press ↓)">
+            <input type="text" id="studentName" placeholder="Name (Press ↓)">
+            <input type="date" id="attendanceDate">
+            <select id="status">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+            <button id="submitBtn" onclick="markAttendance()">Mark Attendance</button>
+        </div>
+
+        <div class="stats-module">
+            <div class="stats-item">
+                <span class="stats-label">Total Records</span>
+                <span class="stats-value" id="totalRecords">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label" style="color:#28a745">Present</span>
+                <span class="stats-value" id="presentCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label" style="color:#dc3545">Absent</span>
+                <span class="stats-value" id="absentCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label">Class Average</span>
+                <span class="stats-value" id="attendancePercentage">0%</span>
+            </div>
+            <button onclick="clearAllData()" class="reset-btn">Reset System</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Last Entry</th><th>Latest Status</th><th>Overall %</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceBody"></tbody>
+        </table>
+
+        <div class="ai-chat-section">
+            <div class="chat-header">
+                <div class="bot-icon">🤖</div>
+                <div>
+                    <h3>Attendance AI Assistant</h3>
+                    <span class="status-indicator">Online & Analyzing</span>
+                </div>
+            </div>
+            
+            <div id="chatWindow" class="chat-window">
+                <div class="ai-msg">
+                    <div class="msg-bubble">
+                        Hello! I'm your Attendance Assistant. Ask me "What is my attendance?" or "How many classes should I attend?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Ask AI (e.g. 'Predict my status')..." onkeypress="if(event.key === 'Enter') askAI()">
+                <button onclick="askAI()" id="chatBtn">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeHistory()">&times;</span>
+            <h3 id="historyTitle">Student History</h3>
+            <div id="calendarView" class="calendar-grid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
